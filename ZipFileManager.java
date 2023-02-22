@@ -17,10 +17,10 @@ public class ZipFileManager {
         try (ZipOutputStream zipOutputStream = new ZipOutputStream(Files.newOutputStream(zipFile))) {
             ZipEntry zipEntry = new ZipEntry(source.getFileName().toString());
             zipOutputStream.putNextEntry(zipEntry);
-            try (InputStream zipInputStream = Files.newInputStream(source)) {
+            try (InputStream fileInputStream = Files.newInputStream(source)) {
                 byte[] buffer = new byte[8 * 1021];
                 int len;
-                while ((len = zipInputStream.read(buffer)) > 0) {
+                while ((len = fileInputStream.read(buffer)) > 0) {
                     zipOutputStream.write(buffer, 0, len);
                 }
             }
